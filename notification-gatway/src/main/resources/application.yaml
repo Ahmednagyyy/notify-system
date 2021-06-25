@@ -1,0 +1,22 @@
+
+server:
+  port: ${PORT:8080}
+
+
+spring:
+
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+    time-zone: UTC
+    default-property-inclusion: non_empty
+    serialization:
+      write-empty-json-arrays: false
+      write-null-map-values: false
+      fail-on-empty-beans: false
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+    parser:
+      allow-non-numeric-numbers: true
+    mapper:
+      default-view-inclusion: false
