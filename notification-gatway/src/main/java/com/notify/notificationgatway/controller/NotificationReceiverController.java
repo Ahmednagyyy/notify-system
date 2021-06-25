@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/api/notification")
 public class NotificationReceiverController {
-    private ServiceNotification serviceNotification;
+    private final ServiceNotification serviceNotification;
 
     public NotificationReceiverController(ServiceNotification serviceNotification){
         this.serviceNotification = serviceNotification;
