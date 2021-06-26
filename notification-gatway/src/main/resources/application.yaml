@@ -20,3 +20,24 @@ spring:
       allow-non-numeric-numbers: true
     mapper:
       default-view-inclusion: false
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+
+
+broker:
+  topics:
+    group-notification: ${GROUP_NOTIFICATION_TOPIC:group_notification_topic}
+    single-notification: ${SINGLE_NOTIFICATION_TOPIC:single_notification_topic}
+

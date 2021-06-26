@@ -1,5 +1,6 @@
 package com.notify.notificationgatway.service;
 
+import com.notify.notificationgatway.broker.KafkaService;
 import com.notify.notificationgatway.model.Notification;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -7,16 +8,35 @@ import reactor.core.publisher.Mono;
 @Service
 public class ServiceNotification {
 
+    private KafkaService kafkaService;
 
-
-    public Mono<Notification> sendGroupNotification(Notification notification) {
-        return Mono.fromCallable(() -> notification.setAudienceType(Notification.AudienceType.GROUP))
-                .map(notification1 -> notification1);
+    public ServiceNotification(KafkaService kafkaService){
+        this.kafkaService = kafkaService;
     }
 
+    /**
+     * @param notification
+     * Receive the group notification and update the notification type before publishing it by kafka
+     */
+    public Mono<Notification> sendGroupNotification(Notification notification) {
+        return Mono.fromCallable(() -> notification.setAudienceType(Notification.AudienceType.GROUP))
+                .map(not -> {
+                    kafkaService.publishNotification(notification);
+                    return notification;
+                });
+
+    }
+
+    /**
+     * @param notification
+     * Receive the single notification and update the notification type before publishing it by kafka
+     */
     public Mono<Notification> sendSingleNotification(Notification notification) {
         return Mono.fromCallable(() -> notification.setAudienceType(Notification.AudienceType.SINGLE))
-                .map(notification1 -> notification1);
+                .map(not -> {
+                    kafkaService.publishNotification(notification);
+                    return notification;
+                });
 
     }
 
