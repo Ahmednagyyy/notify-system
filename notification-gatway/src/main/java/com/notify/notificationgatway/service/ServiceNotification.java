@@ -18,12 +18,12 @@ public class ServiceNotification {
      * @param notification
      * Receive the group notification and update the notification type before publishing it by kafka
      */
-    public Mono<Notification> sendGroupNotification(Notification notification) {
+    public Notification sendGroupNotification(Notification notification) {
         return Mono.fromCallable(() -> notification.setAudienceType(Notification.AudienceType.GROUP))
                 .map(not -> {
                     kafkaService.publishNotification(notification);
                     return notification;
-                });
+                }).block();
 
     }
 
@@ -31,12 +31,12 @@ public class ServiceNotification {
      * @param notification
      * Receive the single notification and update the notification type before publishing it by kafka
      */
-    public Mono<Notification> sendSingleNotification(Notification notification) {
+    public Notification sendSingleNotification(Notification notification) {
         return Mono.fromCallable(() -> notification.setAudienceType(Notification.AudienceType.SINGLE))
                 .map(not -> {
                     kafkaService.publishNotification(notification);
                     return notification;
-                });
+                }).block();
 
     }
 
