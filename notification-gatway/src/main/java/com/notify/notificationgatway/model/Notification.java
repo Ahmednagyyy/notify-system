@@ -6,19 +6,22 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.Date;
 
 @Getter
 @Setter
 @Accessors(chain = true)
 public class Notification {
 
-    private String message;
+    private String title;
+
+    private String body;
 
     private String groupId;
 
-    private String userId;
+    private Date createdAt;
 
-    private String sendBy;
+    private String userId;
 
     @Enumerated(EnumType.STRING)
     private AudienceType audienceType;
