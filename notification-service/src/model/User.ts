@@ -17,10 +17,6 @@ export class User extends Model<User> {
     @Column
     public notificationEnabled: boolean;
 
-    @AllowNull(false)
-    @Column
-    public phoneNumber: string;
-
     @BelongsToMany(() => Device, () => UserDevices)
     devicesList: UserDevices[];
 }

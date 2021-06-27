@@ -1,17 +1,43 @@
-const express = require('express'),
-app = express()
+const express = require("express"),
+  app = express();
 
-require('dotenv').config()
+var Kafka = require("node-rdkafka");
 
-app.get('/', (req , res)=> {
-    res.send('Hello Nagy')
-})
+require("dotenv").config();
+const PORT = process.env.PORT || 3000;
+const KAFKA_HOST = process.env.KAFKA_HOST || "localhost:9092";
 
-const PORT  = process.env.PORT || 3000
+var consumer = new Kafka.KafkaConsumer(
+  {
+    "group.id": "kafka",
+    "metadata.broker.list": KAFKA_HOST,
+  },
+  {}
+);
+
+console.log(`connecting to kafka}`);
+
+consumer.connect();
+
+consumer
+  .on("ready", () => {
+    console.log("consumer ready..");
+    consumer.subscribe([
+      "group_notification_topic",
+      "single_notification_topic"
+    ]);
+    consumer.consume();
+  })
+  .on("data", function (data) {
+    console.log(`received message: ${data.value}`);
+  });
 
 
-app.listen(PORT, ()=> {
-    console.log(`listening to port: ${PORT}`)
-})
+app.get("/", (req, res) => {
+  res.send("Up and running kafka");
+});
 
- 
+
+app.listen(PORT, () => {
+  console.log(`listening to port: ${PORT}`);
+});

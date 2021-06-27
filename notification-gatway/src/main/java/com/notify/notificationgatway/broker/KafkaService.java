@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.notify.notificationgatway.model.Notification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -54,4 +53,21 @@ public class KafkaService {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Testing Topic publishing and pulling
+	 */
+//	@KafkaListener(topics = "group_notification_topic",
+//			groupId = "notifications-stream")
+//	public void consumeGroup(String message)
+//	{
+//		log.info(String.format("Message recieved -> %s", message));
+//	}
+//
+//	@KafkaListener(topics = "single_notification_topic",
+//			groupId = "notifications-stream")
+//	public void consumeSingle(String message)
+//	{
+//		log.info(String.format("Message recieved -> %s", message));
+//	}
 }

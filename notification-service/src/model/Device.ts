@@ -27,4 +27,8 @@ export class Device extends Model<Device> {
   @Column
   public token: string;
 
+  @AllowNull(false)
+  @Column
+  public phoneNumber: string;
+
 }

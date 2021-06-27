@@ -11,7 +11,8 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.2",
-    "sequelize-typescript": "^2.1.0"
+    "sequelize-typescript": "^2.1.0",
+    "node-rdkafka": "^2.10.1"
   },
   "scripts": {
     "test": "echo \"Error: No tests yet\"&& exit 1",
