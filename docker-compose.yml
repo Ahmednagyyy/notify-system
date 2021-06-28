@@ -18,16 +18,15 @@ services:
     ports:
       - "35432:5432"
     depends_on:
-        - zookeeper
         - kafka
-        - gateway
 
   gateway:
     container_name: notifications-gateway-server
-    build: ./notification-gatway
+    image: ahmednagyyy/notification-gateway
     depends_on:
       - zookeeper
       - kafka
+      - service
     ports:
       - "8080:8080"
 
@@ -38,8 +37,6 @@ services:
     env_file: ./notification-service/.env
     depends_on:
       - postgres
-      - zookeeper
-      - kafka
     environment:
       KAFKA_HOST: kafka:9092
       NODE_ENV: development
@@ -52,6 +49,10 @@ services:
     ports:
       - "3000:3000"
     command: sh -c "yarn run sequelize-migrate && yarn run dev" 
+    links: 
+      - zookeeper
+      - kafka
+
 
 
   zookeeper:
