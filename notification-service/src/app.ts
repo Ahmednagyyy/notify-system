@@ -1,7 +1,8 @@
-const express = require("express"),
-  app = express();
+import * as express from "express";
+import { initateConsumer } from "./broker/consumer";
+
+const app: express.Application = express();
   
-const initateConsumer = require("./broker/consumer")
 
 require("dotenv").config();
 
@@ -18,3 +19,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`listening to port: ${PORT}`);
 });
+
+module.exports = app;

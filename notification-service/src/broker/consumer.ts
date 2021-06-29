@@ -1,4 +1,4 @@
-var Kafka = require("node-rdkafka");
+import { KafkaConsumer } from "node-rdkafka";
 
 require("dotenv").config();
 
@@ -8,8 +8,8 @@ const SIGNLE_NOTIFICATION_TOPIC = process.env.SIGNLE_NOTIFICATION_TOPIC || "sing
 const GROUP_NOTIFICATION_TOPIC = process.env.GROUP_NOTIFICATION_TOPIC || "group_notification_topic";
 
 // initateConsumer is a function to start Kafka consumer to listen over the given topics 
-const initateConsumer = () => {
-  var consumer = new Kafka.KafkaConsumer(
+export const  initateConsumer = () => {
+  var consumer = new KafkaConsumer(
     {
       "group.id": "kafka",
       "metadata.broker.list": KAFKA_HOST,
@@ -37,8 +37,6 @@ const initateConsumer = () => {
 
 }
 
-
-module.exports = initateConsumer
 
 
 
