@@ -38,6 +38,11 @@ services:
     depends_on:
       - postgres
     environment:
+      BROKER_CLIENT_ID: notification-service
+      SMS_TOPIC: sms_notification_topic
+      PUSH_NOTIFICATION_TOPIC: push_notification_topic
+      GROUP_NOTIFICATION_TOPIC: group_notification_topic
+      SIGNLE_NOTIFICATION_TOPIC: single_notification_topic
       KAFKA_HOST: kafka:9092
       NODE_ENV: development
       DB_USERNAME: postgres
@@ -49,9 +54,7 @@ services:
     ports:
       - "3000:3000"
     command: sh -c "yarn run sequelize-migrate && yarn run dev" 
-    links: 
-      - zookeeper
-      - kafka
+
 
 
 
