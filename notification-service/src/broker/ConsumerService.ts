@@ -10,7 +10,10 @@ require("dotenv").config();
 const KAFKA_HOST = process.env.KAFKA_HOST || "localhost:9092";
 const SIGNLE_NOTIFICATION_TOPIC = process.env.SIGNLE_NOTIFICATION_TOPIC || "single_notification_topic";
 const GROUP_NOTIFICATION_TOPIC = process.env.GROUP_NOTIFICATION_TOPIC || "group_notification_topic";
-
+const SMS = "SMS"
+const PUSH = "PUSH"
+const GROUP = "GROUP"
+const SINGLE = "SINGLE"
 // initateConsumer is a function to start Kafka consumer to listen over the given topics 
 export const initateConsumer = () => {
   
@@ -52,23 +55,23 @@ export const initateConsumer = () => {
         notificationJson.audienceType,
         notificationJson.notificationType)
 
-      if (notification.audienceType === 'GROUP') {
-        if (notification.notificationType.includes('SMS')) {
+      if (notification.audienceType === GROUP) {
+        if (notification.notificationType.includes(SMS)) {
           console.log(`GROUP SMS Notification Received\nMessage: ${JSON.stringify(notification)}`);
           notificationService.sendGroupSMS(notification)
         }
-        if (notification.notificationType.includes('PUSH')) {
+        if (notification.notificationType.includes(PUSH)) {
           console.log(`GROUP Push Notification Received\nMessage: ${JSON.stringify(notification)}`);
           notificationService.sendGroupPushNotification(notification)
         }
       }
 
-      if (notification.audienceType === 'SINGLE') {
-        if (notification.notificationType.includes('SMS')) {
+      if (notification.audienceType === SINGLE) {
+        if (notification.notificationType.includes(SMS)) {
           console.log(`SINGLE SMS Notification Received\nMessage: ${JSON.stringify(notification)}`);
           notificationService.sendSingleSMS(notification)
         }
-        if (notification.notificationType.includes('PUSH')) {
+        if (notification.notificationType.includes(PUSH)) {
           console.log(`SINGLE Push Notification Received\nMessage: ${JSON.stringify(notification)}`);
           notificationService.sendSinglePushNotification(notification)
         }
