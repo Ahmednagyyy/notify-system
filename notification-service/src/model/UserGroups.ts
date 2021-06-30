@@ -4,7 +4,9 @@ import {
   Model,
   ForeignKey,
   AutoIncrement,
-  BelongsTo
+  BelongsTo,
+  CreatedAt,
+  UpdatedAt
 } from "sequelize-typescript";
 import { User } from "./User";
 import { Group } from "./Group";
@@ -28,4 +30,10 @@ export class UserGroups extends Model<UserGroups> {
 
   @BelongsTo(() => Group)
   group: Group;
+
+  @CreatedAt
+  public createdAt: Date;
+
+  @UpdatedAt
+  public updatedAt: Date;
 }

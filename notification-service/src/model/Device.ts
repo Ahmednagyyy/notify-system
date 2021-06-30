@@ -1,11 +1,11 @@
 import {
   Table,
   Column,
-  CreatedAt,
-  UpdatedAt,
   Model,
   AutoIncrement,
-  AllowNull
+  AllowNull,
+  CreatedAt,
+  UpdatedAt
 } from "sequelize-typescript";
 
 @Table({ tableName: "devices" })
@@ -26,5 +26,11 @@ export class Device extends Model<Device> {
   @AllowNull(false)
   @Column
   public token: string;
+
+  @CreatedAt
+  public createdAt: Date;
+
+  @UpdatedAt
+  public updatedAt: Date;
 
 }

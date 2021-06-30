@@ -1,4 +1,4 @@
-import { IsEmail, Table, Column, Model, AutoIncrement, AllowNull, BelongsToMany } from "sequelize-typescript";
+import { Table, Column, Model, AutoIncrement, AllowNull, BelongsToMany, CreatedAt, UpdatedAt } from "sequelize-typescript";
 import { Device } from "./Device";
 import { Group } from "./Group";
 import { UserDevices } from "./UserDevices";
@@ -24,4 +24,10 @@ export class User extends Model<User> {
 
     @BelongsToMany(() => Group, () => UserGroups)
     groupsList: UserGroups[];
+
+    @CreatedAt
+    public createdAt: Date;
+  
+    @UpdatedAt
+    public updatedAt: Date;
 }

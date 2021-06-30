@@ -4,7 +4,9 @@ import {
   Model,
   ForeignKey,
   AutoIncrement,
-  BelongsTo
+  BelongsTo,
+  CreatedAt,
+  UpdatedAt
 } from "sequelize-typescript";
 import { User } from "./User";
 import { Device } from "./Device";
@@ -28,4 +30,10 @@ export class UserDevices extends Model<UserDevices> {
 
   @BelongsTo(() => Device)
   device: Device;
+
+  @CreatedAt
+  public createdAt: Date;
+
+  @UpdatedAt
+  public updatedAt: Date;
 }

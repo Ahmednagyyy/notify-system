@@ -51,6 +51,7 @@ export const initateConsumer = () => {
       let notification = new NotificationMessage(notificationJson.title,
         notificationJson.body,
         notificationJson.groupId,
+        notificationJson.userId,
         notificationJson.createdAt,
         notificationJson.audienceType,
         notificationJson.notificationType)

@@ -4,8 +4,8 @@ import { Group } from "../model/Group";
 import { User } from "../model/User";
 
 export interface UsersRepository {
-    findAllUserDevices(userId: string): Promise<Array<User>>;
-    findAllUserGroups(userId: string, groupId: String): Promise<Array<User>>;
+    findAllUserDevices(userId: string): Promise<User>;
+    findAllUserGroups(groupId: String): Promise<Array<User>>;
     find(userId: string): Promise<User>;
 }
 
@@ -15,31 +15,30 @@ export class UsersRepositoryImplDb implements UsersRepository {
     constructor() {
     }
     public async find(userId: string): Promise<User> {
-        return await User.findByPk(userId);
-    }
-
-    public async findAllUserDevices(userId: string): Promise<Array<User>> {
-        return await User.findAll({
-            include: [{
-                model: Device,
-                attributes: ["id", "model", "os", "token"],
-            }],
-            where: {
-                id : userId
-            }
+        return await User.findByPk(userId,{
+            attributes: ["id", "name", "notificationEnabled" ],
+        
         });
     }
 
-    public async findAllUserGroups(userId: string, groupId: any): Promise<Array<User>> {
+    public async findAllUserDevices(userId: string): Promise<User> {
+        return await User.findByPk(userId, {
+            attributes: ["id", "name", "notificationEnabled" ],
+            include: [{
+                model: Device,
+                attributes: ["id", "model", "os", "token"]
+            }]
+        });
+    }
+
+    public async findAllUserGroups(groupId: any): Promise<Array<User>> {
         return await User.findAll({
+            attributes: ["id", "name", "notificationEnabled" ],
             include: [{
                 model: Group,
                 attributes: ["id", "name"],
                 where: { id : groupId}
-            }],
-            where: {
-                id: userId,
-            }
+            }]
         });
     
     }

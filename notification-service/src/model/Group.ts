@@ -3,7 +3,9 @@ import {
   Column,
   Model,
   AutoIncrement,
-  AllowNull
+  AllowNull,
+  CreatedAt,
+  UpdatedAt
 } from "sequelize-typescript";
 
 @Table({ tableName: "group" })
@@ -16,5 +18,11 @@ export class Group extends Model<Group> {
   @AllowNull(false)
   @Column
   public name: string;
+
+  @CreatedAt
+  public createdAt: Date;
+
+  @UpdatedAt
+  public updatedAt: Date;
 
 }
