@@ -8,8 +8,8 @@ import {
   AllowNull
 } from "sequelize-typescript";
 
-@Table({ tableName: "devices" })
-export class Device extends Model<Device> {
+@Table({ tableName: "group" })
+export class Group extends Model<Group> {
 
   @AutoIncrement
   @Column({ primaryKey: true })
@@ -17,14 +17,6 @@ export class Device extends Model<Device> {
 
   @AllowNull(false)
   @Column
-  public model: string;
-
-  @AllowNull(false)
-  @Column
-  public os: string;
-
-  @AllowNull(false)
-  @Column
-  public token: string;
+  public name: string;
 
 }

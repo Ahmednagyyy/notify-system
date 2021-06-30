@@ -19,6 +19,8 @@ services:
       - "35432:5432"
     depends_on:
         - kafka
+    logging:
+        driver: none      
 
   gateway:
     container_name: notifications-gateway-server
@@ -65,6 +67,8 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    logging:
+      driver: none        
 
   kafka:
     container_name: notifications-pub-server
@@ -79,4 +83,6 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
+    logging:
+      driver: none  
       
