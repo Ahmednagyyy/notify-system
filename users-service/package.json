@@ -1,5 +1,5 @@
 {
-  "name": "notification-service",
+  "name": "users-service",
   "version": "1.0.0",
   "description": "A service which recevies notification messages through Kafka and create notifications based on the message type",
   "main": "src/app.ts",

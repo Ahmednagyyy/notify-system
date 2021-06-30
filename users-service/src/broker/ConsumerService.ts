@@ -46,7 +46,6 @@ export const initateConsumer = () => {
     .on("data", function (data) {
 
       const notificationJson = JSON.parse(data.value.toString())
-      console.log(`Message Received\n${JSON.stringify(notificationJson)}`);
 
       let notification = new Message(notificationJson.title,
         notificationJson.body,

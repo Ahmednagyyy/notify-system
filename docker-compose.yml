@@ -22,21 +22,21 @@ services:
     logging:
         driver: none      
 
-  gateway:
+  gateway-service:
     container_name: notifications-gateway-server
     image: ahmednagyyy/notification-gateway
     depends_on:
       - zookeeper
       - kafka
-      - service
+      - user-service
     ports:
       - "8080:8080"
 
 
-  service:
-    container_name: notifications-service-server
-    build: ./notification-service
-    env_file: ./notification-service/.env
+  user-service:
+    container_name: users-service-server
+    build: ./users-service
+    env_file: ./users-service/.env
     depends_on:
       - postgres
     environment:
