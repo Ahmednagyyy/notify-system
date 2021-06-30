@@ -1,15 +1,14 @@
 import { KafkaConsumer } from "node-rdkafka";
 import container from "../di/inversify.config";
 import TYPES from "../di/types";
-import { NotificationMessage } from "../model/NotificationMessage";
+import { Message } from "../model/Message";
 import { NotificationService } from "../service/NotificationService";
+import { GROUP_NOTIFICATION_TOPIC, PUSH_NOTIFICATION_TOPIC, SIGNLE_NOTIFICATION_TOPIC, SMS_NOTIFICATION_TOPIC } from "./Topics";
 
 require("dotenv").config();
 
 // Kafka config and topics values
 const KAFKA_HOST = process.env.KAFKA_HOST || "localhost:9092";
-const SIGNLE_NOTIFICATION_TOPIC = process.env.SIGNLE_NOTIFICATION_TOPIC || "single_notification_topic";
-const GROUP_NOTIFICATION_TOPIC = process.env.GROUP_NOTIFICATION_TOPIC || "group_notification_topic";
 const SMS = "SMS"
 const PUSH = "PUSH"
 const GROUP = "GROUP"
@@ -47,8 +46,9 @@ export const initateConsumer = () => {
     .on("data", function (data) {
 
       const notificationJson = JSON.parse(data.value.toString())
+      console.log(`Message Received\n${JSON.stringify(notificationJson)}`);
 
-      let notification = new NotificationMessage(notificationJson.title,
+      let notification = new Message(notificationJson.title,
         notificationJson.body,
         notificationJson.groupId,
         notificationJson.userId,

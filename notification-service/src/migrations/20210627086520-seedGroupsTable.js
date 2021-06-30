@@ -16,19 +16,7 @@ module.exports = {
         {
           id: 3,
           name: "Group3",
-        },
-        {
-          id: 4,
-          name: "Group4",
-        },
-        {
-          id: 5,
-          name: "Group5",
-        },
-        {
-          id: 6,
-          name: "Group6",
-        },
+        }
       ],
       {}
     );

@@ -7,7 +7,6 @@ import { User } from "../model/User";
 export interface UserService {
     getAllUserDevices(userId: string): Promise<User>;
     getUserGroups(groupId: String): Promise<Array<User>>;
-    getUser(userId: string): Promise<User>;
 }
 
 @injectable()
@@ -16,16 +15,13 @@ export class UserServiceImpl implements UserService {
     private UsersRepositoryDb: UsersRepository;
 
     public async getAllUserDevices(userId: string): Promise<User> {
+        // Get User with all of his devices
         const UsersDb: User = await this.UsersRepositoryDb.findAllUserDevices(userId);
         return UsersDb;
     }
     public async getUserGroups(groupId: String): Promise<User[]> {
+        // Get Users by group
         const UsersDb: Array<User> = await this.UsersRepositoryDb.findAllUserGroups(groupId);
         return UsersDb;
     }
-    public async getUser(userId: string): Promise<User> {
-        const user = await this.UsersRepositoryDb.find(userId);
-        return user;  
-    }
-
 }

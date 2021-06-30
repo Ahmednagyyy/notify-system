@@ -1,4 +1,4 @@
-export class NotificationMessage {
+export class Message {
   constructor(
     title: string,
     body: string,

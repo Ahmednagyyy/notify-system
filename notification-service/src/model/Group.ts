@@ -5,10 +5,12 @@ import {
   AutoIncrement,
   AllowNull,
   CreatedAt,
-  UpdatedAt
+  UpdatedAt,
+  HasMany
 } from "sequelize-typescript";
+import { UserGroups } from "./UserGroups";
 
-@Table({ tableName: "group" })
+@Table({ tableName: "groups" })
 export class Group extends Model<Group> {
 
   @AutoIncrement
@@ -24,5 +26,8 @@ export class Group extends Model<Group> {
 
   @UpdatedAt
   public updatedAt: Date;
+
+  @HasMany(() => UserGroups, { as: "userGroups" })
+  userGroups: UserGroups[];
 
 }

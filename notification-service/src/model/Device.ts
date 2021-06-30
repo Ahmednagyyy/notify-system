@@ -5,8 +5,11 @@ import {
   AutoIncrement,
   AllowNull,
   CreatedAt,
-  UpdatedAt
+  UpdatedAt,
+  HasMany,
+  BelongsToMany
 } from "sequelize-typescript";
+import { UserDevices } from "./UserDevices";
 
 @Table({ tableName: "devices" })
 export class Device extends Model<Device> {
@@ -27,10 +30,17 @@ export class Device extends Model<Device> {
   @Column
   public token: string;
 
+  @AllowNull(false)
+  @Column
+  public phone: string;
+
   @CreatedAt
   public createdAt: Date;
 
   @UpdatedAt
   public updatedAt: Date;
+
+  @HasMany(() => UserDevices, { as: "userDevices" })
+  userDevices: UserDevices[];
 
 }

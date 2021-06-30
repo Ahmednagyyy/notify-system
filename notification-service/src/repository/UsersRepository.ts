@@ -2,11 +2,12 @@ import { injectable } from "inversify";
 import { Device } from "../model/Device";
 import { Group } from "../model/Group";
 import { User } from "../model/User";
+import { UserDevices } from "../model/UserDevices";
+import { UserGroups } from "../model/UserGroups";
 
 export interface UsersRepository {
     findAllUserDevices(userId: string): Promise<User>;
     findAllUserGroups(groupId: String): Promise<Array<User>>;
-    find(userId: string): Promise<User>;
 }
 
 @injectable()
@@ -14,32 +15,37 @@ export class UsersRepositoryImplDb implements UsersRepository {
 
     constructor() {
     }
-    public async find(userId: string): Promise<User> {
-        return await User.findByPk(userId,{
-            attributes: ["id", "name", "notificationEnabled" ],
-        
-        });
-    }
-
+ 
     public async findAllUserDevices(userId: string): Promise<User> {
+        // Build query to get user along with any related device if relation exists
         return await User.findByPk(userId, {
-            attributes: ["id", "name", "notificationEnabled" ],
+            attributes: ["id", "name", "notificationEnabled"],
             include: [{
                 model: Device,
-                attributes: ["id", "model", "os", "token"]
+                include: [{
+                    model: UserDevices
+                }]
             }]
         });
     }
 
     public async findAllUserGroups(groupId: any): Promise<Array<User>> {
+        // Build query to get users by the groupId along with any related device if relation exists
         return await User.findAll({
-            attributes: ["id", "name", "notificationEnabled" ],
+            attributes: ["id", "name", "notificationEnabled"],
             include: [{
+                model: Device,
+                include: [{
+                    model: UserDevices
+                }]
+            }, {
                 model: Group,
-                attributes: ["id", "name"],
-                where: { id : groupId}
+                where: { id: groupId },
+                include: [{
+                    model: UserGroups,
+                }]
             }]
         });
-    
+
     }
 }

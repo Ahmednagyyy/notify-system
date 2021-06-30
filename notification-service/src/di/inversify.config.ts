@@ -8,12 +8,15 @@ import { NotificationService, NotificationServiceImpl } from "../service/Notific
 
 const container = new Container();
 
+//Provide User Service for dependency injection
 container.
 bind<UserService>(TYPES.UsersService).to(UserServiceImpl);
 
+//Provide Notification Service for dependency injection
 container.
 bind<NotificationService>(TYPES.NotificationService).to(NotificationServiceImpl);
 
+//Provide Users Repository for dependency injection
 container
   .bind<UsersRepository>(TYPES.UsersRepository)
   .to(UsersRepositoryImplDb);
