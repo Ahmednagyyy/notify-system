@@ -1,8 +1,6 @@
 import {
   Table,
   Column,
-  CreatedAt,
-  UpdatedAt,
   Model,
   AutoIncrement,
   AllowNull

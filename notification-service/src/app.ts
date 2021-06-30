@@ -1,5 +1,5 @@
 import * as express from "express";
-import { initateConsumer } from "./broker/consumer";
+import { initateConsumer } from "./broker/ConsumerService";
 
 const app: express.Application = express();
   

@@ -6,7 +6,7 @@ import { UserGroups } from "./UserGroups";
 
 @Table({tableName: "users"})
 export class User extends Model<User> {
-
+   
     @AutoIncrement
     @Column({ primaryKey: true })
     public id: number;

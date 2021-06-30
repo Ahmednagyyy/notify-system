@@ -1,5 +1,8 @@
 import { KafkaConsumer } from "node-rdkafka";
+import container from "../di/inversify.config";
+import TYPES from "../di/types";
 import { NotificationMessage } from "../model/NotificationMessage";
+import { NotificationService } from "../service/NotificationService";
 
 require("dotenv").config();
 
@@ -10,6 +13,11 @@ const GROUP_NOTIFICATION_TOPIC = process.env.GROUP_NOTIFICATION_TOPIC || "group_
 
 // initateConsumer is a function to start Kafka consumer to listen over the given topics 
 export const initateConsumer = () => {
+  
+  const notificationService: NotificationService = container.get(
+    TYPES.NotificationService
+  );
+  
   var consumer = new KafkaConsumer(
     {
       "group.id": "kafka",
@@ -47,21 +55,24 @@ export const initateConsumer = () => {
       if (notification.audienceType === 'GROUP') {
         if (notification.notificationType.includes('SMS')) {
           console.log(`GROUP SMS Notification Received\nMessage: ${JSON.stringify(notification)}`);
+          notificationService.sendGroupSMS(notification)
         }
         if (notification.notificationType.includes('PUSH')) {
           console.log(`GROUP Push Notification Received\nMessage: ${JSON.stringify(notification)}`);
+          notificationService.sendGroupPushNotification(notification)
         }
       }
 
       if (notification.audienceType === 'SINGLE') {
         if (notification.notificationType.includes('SMS')) {
           console.log(`SINGLE SMS Notification Received\nMessage: ${JSON.stringify(notification)}`);
+          notificationService.sendSingleSMS(notification)
         }
         if (notification.notificationType.includes('PUSH')) {
           console.log(`SINGLE Push Notification Received\nMessage: ${JSON.stringify(notification)}`);
+          notificationService.sendSinglePushNotification(notification)
         }
       }
-      return notification;
     });
 
 }
