@@ -12,7 +12,7 @@
 	<artifactId>notification-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>notification-service</name>
-	<description>A gateway application that receives Push notifications and SMS requests and publish it to Kafka queue </description>
+	<description>this application that send/receives Push notifications and SMS </description>
 
 
 	<properties>
@@ -99,6 +99,17 @@
 			<groupId>com.github.vladimir-bukhtoyarov</groupId>
 			<artifactId>bucket4j-core</artifactId>
 			<version>4.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
 		</dependency>
 	</dependencies>
 

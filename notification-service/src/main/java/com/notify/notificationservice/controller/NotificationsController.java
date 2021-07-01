@@ -1,7 +1,7 @@
 package com.notify.notificationservice.controller;
 
 import com.notify.notificationservice.model.Notification;
-import com.notify.notificationservice.model.NotificationGatewayResponse;
+import com.notify.notificationservice.model.NotificationResponse;
 import com.notify.notificationservice.service.ServiceNotification;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/notification")
-public class NotificationGatewayController {
+public class NotificationsController {
     private final ServiceNotification serviceNotification;
 
 
 
-    public NotificationGatewayController(ServiceNotification serviceNotification) {
+    public NotificationsController(ServiceNotification serviceNotification) {
         this.serviceNotification = serviceNotification;
     }
 
     @PostMapping(value = "/group", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<NotificationGatewayResponse> sendGroupNotification
+    public ResponseEntity<NotificationResponse> sendGroupNotification
             (@RequestBody Notification notification) {
             return serviceNotification.sendGroupNotification(notification);
     }
 
     @PostMapping(value = "/single", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<NotificationGatewayResponse> sendSingleNotification
+    public ResponseEntity<NotificationResponse> sendSingleNotification
             (@RequestBody Notification notification) {
 
             return serviceNotification.sendSingleNotification(notification);

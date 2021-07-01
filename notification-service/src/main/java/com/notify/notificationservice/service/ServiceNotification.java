@@ -2,7 +2,7 @@ package com.notify.notificationservice.service;
 
 import com.notify.notificationservice.broker.KafkaService;
 import com.notify.notificationservice.model.Notification;
-import com.notify.notificationservice.model.NotificationGatewayResponse;
+import com.notify.notificationservice.model.NotificationResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
@@ -25,8 +25,8 @@ public class ServiceNotification {
     /**
      * @param notification Receive the group notification and update the notification type before publishing it by kafka
      */
-    public ResponseEntity<NotificationGatewayResponse> sendGroupNotification(Notification notification) {
-        NotificationGatewayResponse response = new NotificationGatewayResponse();
+    public ResponseEntity<NotificationResponse> sendGroupNotification(Notification notification) {
+        NotificationResponse response = new NotificationResponse();
         return Mono.fromCallable(() -> notification)
                 .map(validation -> {
                     if (notification == null) {
@@ -34,7 +34,7 @@ public class ServiceNotification {
                         response.setMessage("Notification sending failed");
                         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
                     } else {
-                        NotificationGatewayResponse res =
+                        NotificationResponse res =
                                 checkNotificationData(notification, response);
                         response.getErrors().addAll(res.getErrors());
                         if (notification.getGroupId() == null ||
@@ -54,8 +54,8 @@ public class ServiceNotification {
     /**
      * @param notification Receive the single notification and update the notification type before publishing it by kafka
      */
-    public ResponseEntity<NotificationGatewayResponse> sendSingleNotification(Notification notification) {
-        NotificationGatewayResponse response = new NotificationGatewayResponse();
+    public ResponseEntity<NotificationResponse> sendSingleNotification(Notification notification) {
+        NotificationResponse response = new NotificationResponse();
         return Mono.fromCallable(() -> notification)
                 .map(validation -> {
                     if (notification == null) {
@@ -63,7 +63,7 @@ public class ServiceNotification {
                         response.setMessage("Notification sending failed");
                         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
                     } else {
-                        NotificationGatewayResponse res =
+                        NotificationResponse res =
                                 checkNotificationData(notification, response);
                         response.getErrors().addAll(res.getErrors());
                         if (notification.getUserId() == null ||
@@ -81,9 +81,9 @@ public class ServiceNotification {
     }
 
     @NotNull
-    private ResponseEntity<NotificationGatewayResponse> getNotificationGatewayResponse(
+    private ResponseEntity<NotificationResponse> getNotificationGatewayResponse(
             Notification notification,
-            NotificationGatewayResponse response)
+            NotificationResponse response)
     {
         if (!response.getErrors().isEmpty()) {
             response.setMessage("Notification sending failed");
@@ -95,9 +95,9 @@ public class ServiceNotification {
         }
     }
 
-    private NotificationGatewayResponse checkNotificationData(
+    private NotificationResponse checkNotificationData(
             Notification notification,
-            NotificationGatewayResponse response
+            NotificationResponse response
     ) {
         if (notification.getNotificationType() == null ||
                 notification.getNotificationType().name().isEmpty()) {

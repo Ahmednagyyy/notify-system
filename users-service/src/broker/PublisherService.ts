@@ -25,7 +25,7 @@ export const publishMessage = (message: String, topic: String) => {
 
     const success = producer.write(Buffer.from(message));
     if (success) {
-      console.log(`message queued (${JSON.stringify(message)})`);
+      console.log(`Sent Successfully`);
     } else {
       console.log('Too many messages in the queue already..');
     }

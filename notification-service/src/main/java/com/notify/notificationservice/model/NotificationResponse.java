@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class NotificationGatewayResponse {
+public class NotificationResponse {
 
     private Set<String> errors = new HashSet<>();
 
