@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "a2bcdf81-3b78-491a-bcb9-100d305669d1",
+		"name": "Notify-system-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send group push notification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": \"Use Promo code 'D75' for 75% discount\",\n    \"title\": \"Discount!\",\n    \"groupId\": \"2\",\n    \"notificationType\": \"PUSH_NOTIFICATION\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notification/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notification",
+						"group"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send single push notification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": \"Use Promo code 'D75' for 75% discount\",\n    \"title\": \"Discount!\",\n    \"userId\": \"2\",\n    \"notificationType\": \"PUSH_NOTIFICATION\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notification/single",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notification",
+						"single"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send group sms messages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": \"Use Promo code 'D75' for 75% discount\",\n    \"title\": \"Discount!\",\n    \"groupId\": \"2\",\n    \"notificationType\": \"SMS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notification/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notification",
+						"group"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send single sms message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": \"Use Promo code 'D75' for 75% discount\",\n    \"title\": \"Discount!\",\n    \"userId\": \"2\",\n    \"notificationType\": \"SMS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notification/single",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notification",
+						"single"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
