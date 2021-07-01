@@ -24,7 +24,7 @@ sequelize.addModels([User, Device, Group, UserGroups, UserDevices]);
 initateConsumer()
 
 app.get("/", (req, res) => {
-  res.send("Up and running kafka");
+  res.send("Up and running");
 });
 
 
