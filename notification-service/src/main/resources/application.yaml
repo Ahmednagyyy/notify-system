@@ -2,6 +2,8 @@ server:
   port: ${PORT:8080}
 
 
+contextPath=/swagger2:
+
 spring:
 
   jackson:

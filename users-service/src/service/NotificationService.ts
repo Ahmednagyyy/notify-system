@@ -55,10 +55,9 @@ export class NotificationServiceImpl implements NotificationService {
                 `Hi ${user.name}, ${notification.body}`,
                 deviceJson.token)
 
-            console.log(`Sending Push Notification: \n${JSON.stringify(pushNotification)}`)
-
             // Check user settings to send push notifications
             if (user.notificationEnabled) {
+                console.log(`Sending Push Notification: \n${JSON.stringify(pushNotification)}`)
                 //Publish push notification on kafka topic
                 publishMessage(JSON.stringify(pushNotification), PUSH_NOTIFICATION_TOPIC)
             }
@@ -99,10 +98,9 @@ export class NotificationServiceImpl implements NotificationService {
                     `Hi ${user.name}, ${notification.body}`,
                     deviceJson.token)
 
-                console.log(`Sending Push Notification: \n${JSON.stringify(pushNotification)}`)
-
                 // Check user settings to send push notifications
                 if (user.notificationEnabled) {
+                    console.log(`Sending Push Notification: \n${JSON.stringify(pushNotification)}`)
                     //Publish push notification on kafka topic
                     publishMessage(JSON.stringify(pushNotification), PUSH_NOTIFICATION_TOPIC)
                 }
