@@ -89,8 +89,7 @@ public class ServiceNotification {
             response.setMessage("Notification sending failed");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } else {
-//            kafkaService.publishNotification(notification);
-            log.info("HERE");
+            kafkaService.publishNotification(notification);
             response.setMessage("Notification sent successfully");
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
