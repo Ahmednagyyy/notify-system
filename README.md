@@ -48,12 +48,12 @@ Notify system is a simple solution designed for sending Push-notifications and S
 
 
 # API:
-1. Two main endpoints 
+1. Two main endpoints [Postman Collection](https://github.com/Ahmednagyyy/notify-system/blob/main/resources/Notify-system-api.postman_collection.json) 
 * /api/notification/group
 * /api/notification/single
 2. Swagger UI : Run the app and open -> http://localhost:8080/swagger-ui.html#/notifications-controller
 3. Or you can use openapi/swagger files 
-* [Openapi.json](https://github.com/Ahmednagyyy/notify-system/blob/main/resources/openapi3.json)
-* [swagger.yaml](https://github.com/Ahmednagyyy/notify-system/blob/main/resources/swagger.yml)
+* [Open Api](https://github.com/Ahmednagyyy/notify-system/blob/main/resources/openapi3.json)
+* [Swagger](https://github.com/Ahmednagyyy/notify-system/blob/main/resources/swagger.yml)
 
 
