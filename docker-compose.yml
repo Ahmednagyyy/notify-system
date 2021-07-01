@@ -22,9 +22,9 @@ services:
     logging:
         driver: none      
 
-  gateway-service:
-    container_name: notifications-gateway-server
-    image: ahmednagyyy/notification-gateway
+  notification-service:
+    container_name: notifications-service-server
+    image: ahmednagyyy/notification-service
     depends_on:
       - zookeeper
       - kafka
