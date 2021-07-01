@@ -1,0 +1,47 @@
+server:
+  port: ${PORT:8080}
+
+
+spring:
+
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+    time-zone: UTC
+    default-property-inclusion: non_empty
+    serialization:
+      write-empty-json-arrays: false
+      write-null-map-values: false
+      fail-on-empty-beans: false
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+    parser:
+      allow-non-numeric-numbers: true
+    mapper:
+      default-view-inclusion: false
+
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:9092
+      group-id: group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    producer:
+      bootstrap-servers: kafka:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+
+
+broker:
+  subscriptions:
+    sms-notification: ${SMS_NOTIFICATION_TOPIC:sms_notification_topic}
+    push-notification: ${PUSH_NOTIFICATION_TOPIC:push_notification_topic}
+
+  topics:
+    group-notification: ${GROUP_NOTIFICATION_TOPIC:group_notification_topic}
+    single-notification: ${SINGLE_NOTIFICATION_TOPIC:single_notification_topic}
+
+

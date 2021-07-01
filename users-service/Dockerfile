@@ -1,0 +1,21 @@
+FROM node:14
+
+# Create app directory
+RUN mkdir -p /notification-service
+
+WORKDIR /notification-service
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+
+RUN yarn global add nodemon sequelize-cli typescript pm2 node-pre-gyp ts-node
+RUN rm -rf node_modules && yarn install --check-files --non-interactive --ignore-optional --frozen-lockfile
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "yarn", "run" ]
+

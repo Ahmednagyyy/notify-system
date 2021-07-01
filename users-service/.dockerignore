@@ -1,0 +1,9 @@
+.vscode/**
+.nyc_output/**
+server/logs/**
+Dockerfile
+docker-compose*
+node_modules/**
+.git/**
+dist/**
+coverage/
