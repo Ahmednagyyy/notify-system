@@ -8,6 +8,7 @@ Notify system is a simple solution designed for sending Push-notifications and S
 1. This application built using microservice architecture
 2. Apache Kafka for service communication
 3. Postgres as datastore  
+4. All services are containarized using Docker-compose
 
 
 # Services:
