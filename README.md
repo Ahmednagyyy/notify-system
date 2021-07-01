@@ -5,7 +5,7 @@ Notify system is a simple solution designed for sending Push-notifications and S
 
 # Solution: 
 ![alt text](https://github.com/Ahmednagyyy/notify-system/blob/main/resources/notify-system-diagram.png "ALE Solution")
-1. This application build using microservice architecture
+1. This application built using microservice architecture
 2. Apache Kafka for service communication
 3. Postgres as datastore  
 
