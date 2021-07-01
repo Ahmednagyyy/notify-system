@@ -50,7 +50,29 @@ Notify system is a simple solution designed for sending Push-notifications and S
 ```
 
 # Logs: 
-1- Logs will be visible after runing `docker-compose up` however for each service logs please run this command `docker logs -f <container_name>`
+1. Logs will be visible after runing `docker-compose up` however for each service logs please run this command `docker logs -f <container_name>`
+2. Examples
+* Notification-service kafka publishing :
+```
+notifications-service-server | 2021-07-01 10:24:00.117  INFO 1 --- [nio-8080-exec-3] c.n.n.broker.KafkaService                : Publish Single Notification
+notifications-service-server |  Notification content: {"title":"Discount!","body":"Use Promo code 'D75' for 75% discount","createdAt":"2021-07-01T10:24:00","userId":"1","audienceType":"SINGLE","notificationType":"PUSH_NOTIFICATION"}
+notifications-service-server |  on Topic name: single_notification_topic
+```
+* Notification-service Kafka receiving
+```
+notifications-service-server | 2021-07-01 10:24:00.212  INFO 1 --- [ntainer#2-0-C-1] c.n.n.broker.KafkaService                : SMS sent -> {"body":"Hi Ahmed Mohamed, Use Promo code 'D75' for 75% discount","title":"Discount!","token":"xxxxxx-xxxxxx-xxxxxx-xxxxxx1"}
+```
+* Users-service Kafka receiving
+```
+SINGLE Push Notification Received
+users-service-server    | Message: {"audienceType":"SINGLE","body":"Use Promo code 'D75' for 75% discount","title":"Discount!","userId":"1","createdAt":"2021-07-01T10:24:00","notificationType":"PUSH_NOTIFICATION"}
+```
+* Users-service kafka publishing :
+```
+users-service-server    | Sending Push Notification:
+users-service-server    | {"body":"Hi Ahmed Mohamed, Use Promo code 'D75' for 75% discount","title":"Discount!","token":"xxxxxx-xxxxxx-xxxxxx-xxxxxx1"}
+users-service-server    | Sent Successfully
+```
 
 
 # Notes: 
