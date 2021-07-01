@@ -25,14 +25,15 @@ Notify system is a simple solution designed for sending Push-notifications and S
 
 
 # Flow:
-1. Notification service receivies notification request and validate it, then send it to User Service over Kafka
-2. User service receivies Kafka message and starts to handle the message based on its type
+1. When App first run sequelize (ORM) seeds Users, Devices, Groups, and its releations to the database
+2. Notification service receivies notification request and validate it, then send it to User Service over Kafka
+3. User service receivies Kafka message and starts to handle the message based on its type
 * If it is single sms message, it gets user by id and get all of his devices mobile numbers to send the sms
 * If it is a group sms message, it gets all users related to this group and get each user devices and its numbers to send the sms
 * If it is single push notification, it gets user by id and get all of his devices tokens to send the push notification
 * If it is a group push notification, it gets all users related to this group and get each user devices and its devices tokens to send the sms
-3. Send notification back with user details to Notification service
-4. Notification service send SMS/push notifications to users, and Handle rate limit in case of SMS messages
+4. Send notification back with user details to Notification service
+5. Notification service send SMS/push notifications to users, and Handle rate limit in case of SMS messages
 
 
 # How to run:
@@ -40,8 +41,17 @@ Notify system is a simple solution designed for sending Push-notifications and S
 2. Clean docker compose by `docker-compose down -v --rmi all --remove-orphans`
 
 
+# Project structure:
+```
+- notification-service
+- users-service
+- resources folder
+- docker-compose
+```
+
 # Logs: 
 1- Logs will be visible after runing `docker-compose up` however for each service logs please run this command `docker logs -f <container_name>`
+
 
 # Notes: 
 1. I've built and pushed Java service over Docker hub because of mvn dependancies, so I provide it as an Image in the docker compose
