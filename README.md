@@ -38,7 +38,7 @@ Notify system is a simple solution designed for sending Push-notifications and S
 
 
 # How to run:
-1. Please add .env file copy it from .env.copy inside users-service
+1. Please add .env file inside users-service, copy it from .env.copy 
 2. For the first time please run the docker images of all services with `docker-compose up --build` then run with `docker-compose up`
 3. Clean docker compose by `docker-compose down -v --rmi all --remove-orphans`
 
